@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Get Reports</title>
+	<link rel="icon" href="https://cdn-icons-png.flaticon.com/512/1062/1062557.png">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Indie+Flower&family=Poppins:wght@300&display=swap"
+		rel="stylesheet">
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+
+		}
+
+		body {
+			color: rgb(105, 89, 225);
+			background-color: #907fde;
+			font-family: 'Poppins', sans-serif;
+			background-image: url("woman-1284353_1920.jpg");
+		}
+
+		td {
+			color: rgb(0, 16, 49);
+		}
+
+		.s1 {
+			color: orangered;
+			/* text-decoration: underline; */
+		}
+
+		.container {
+			background-color: rgb(196 218 188);
+			background-image: url(images/pregWom.png);
+			background-size: cover;
+			width: 750px;
+			margin: 20px auto 0;
+			border: 2px solid black;
+			padding: 100px 25px;
+			padding-bottom: 50px;
+			box-shadow: 2px 2px 2px rgb(2, 66, 46), 0 0 25px rgb(48, 69, 56), 0 0 5px rgb(41, 98, 80);
+			position: relative;
+
+		}
+
+		.topImg {
+			position: absolute;
+			height: auto;
+			width: 10%;
+
+			top: -20px;
+			left: 45%;
+		}
+
+		.container h1 {
+			text-align: center;
+			padding: 5px 10px 10px 10px;
+			line-height: 24px;
+			/* font-family: 'Indie Flower', cursive; */
+		}
+
+		.input-name {
+			width: 90%;
+			position: relative;
+			margin: 20px auto;
+			font-weight: bold;
+		}
+
+		.button {
+			margin: 10px 10px;
+			padding: 7px 7px;
+			background-color: #4c7aaf;
+			border: none;
+			color: white;
+			width: 100px;
+			text-align: center;
+			text-decoration: none;
+			display: inline-block;
+			font-size: 16px;
+			cursor: pointer;
+			border-radius: 8px;
+		}
+
+		#upBtn {
+			background-color: orangered;
+		
+		}
+
+		#upBtn:hover {
+			background-color: rgb(112, 30, 0);
+		}
+
+		.button:hover {
+			background-color: rgba(0, 12, 74, 0.683);
+		}
+
+		hr {
+			border: 2px solid black;
+			border-bottom: 0;
+			border-left: 0;
+			border-right: 0;
+			width: 85%;
+		}
+	</style>
+
+</head>
+
+<body>
+	<div class="container">
+		<img src="https://cdn-icons-png.flaticon.com/512/1062/1062557.png" class="topImg" alt="">
+		<center>
+			<h1>Get All Your <span class="s1">Reports</span> on <span class="s1">PregIksana</span></h1>
+		</center>
+
+		<div class="form-container">
+			<div class="input-name">
+				<table>
+					<tr>
+						<td>Download Covid Vaccination Certificate:</label></td>
+						<td><button class="button">Download</button>
+					</tr>
+					</td>
+					</tr>
+
+					<tr>
+						<td>Download Alpha-fetoprotein (AFP) Test Report:</label></td>
+						<td><button class="button">Download</button>
+					</tr>
+					</td>
+					</tr>
+
+					<tr>
+						<td>Download Chorionic Villus Sampling Report:</label></td>
+						<td><button class="button">Download</button>
+					</tr>
+					</td>
+					</tr>
+
+					<tr>
+						<td>Download Ultrasound Test Report:</label></td>
+						<td><button class="button">Download</button>
+					</tr>
+					</td>
+					</tr>
+
+					<tr>
+						<td>Download Urine Pregancy Test Report:</label></td>
+						<td><button class="button">Download</button>
+					</tr>
+					</td>
+					</tr>
+				</table>
+
+				<hr>
+				
+  <label for="myfile">Upload other Test Reports</label>
+  <input type="file" id="myfile" name="myfile" multiple><br>
+  <button class="button" id="upBtn">Upload</button>
+  
+</form>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>
+
+

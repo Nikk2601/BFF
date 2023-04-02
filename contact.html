@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Form1</title>
+	<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	  <link rel="stylesheet" href="style1A.css">
+	  
+</head>
+<body>
+	<section id="main">
+		<nav> 
+		 <a href="#" class="logo" >
+		  <img src="Bumpyride!.png" alt="Logo" >
+		  </a>
+
+		  <span class="menu-space"></span>
+
+		  <ul class="menu">
+			  <li><a href="Index.html">Home</a></li>
+			  <li><a href="blog.html">Blogs</a></li>
+			  <li><a href="reminder.html">Reminders</a></li>
+			  <li><a href="bmi.html">BMI Calculator</a></li>
+			  <li><a href="#">Login/ Sign Up</a></li>
+		  </ul>
+		  <a href="contact.html" class="hey"><strong>Contact Us!</strong></a>
+		</nav>
+	 ..
+	
+		
+		<div class="box">
+		  <div class="form">
+			  <h2>Contact with us!</h2>
+			  <p>We would to respond your quries while using the website.</p>
+			  <form action="#" onsubmit="return validation()">
+				  <div class="inputbox" >
+					  <label>Name:</label>
+					  <input type="text" name="name" id="name" placeholder="Your Name" autocomplete="off">
+					  <span id="username" class="text-danger font-weight-bold" style="color: red; font-weight: bolder;"></span>
+				  </div>
+
+				  <div class="inputbox">
+					  <label>Mobile No.:</label>
+					  <input type="number" name="mobile" id="mobile" placeholder="Mobile">
+					  <span id="mobileno" class="text-danger font-weight-bold" style="color: red; font-weight: bolder;"></span>
+				  </div>
+
+				  <div class="inputbox">
+					  <label>Email:</label>
+					  <input type="email" name="email" id="email" placeholder="Email">
+					  <span id="emails" class="text-danger font-weight-bold" style="color: red; font-weight: bolder;"></span>
+				  </div>
+
+				  <div class="inputbox">
+					<label>Subject:</label> 
+					 <input type="text" name="branch" id="branch" placeholder="Subject">
+					 <span id="branches" class="text-danger font-weight-bold" style="color: red; font-weight: bolder;"></span>
+				 </div><div class="inputbox">
+					<label>Message:</label> 
+					 <input type="text" name="branch" id="branch" placeholder="Message">
+					 <span id="branches" class="text-danger font-weight-bold" style="color: red; font-weight: bolder;"></span>
+				 </div>
+				 
+				  <div class="inputbox">
+					  <input type="submit" class="btn btn-success" value="submit" placeholder="Submit">
+				  </div>
+			  </form>
+		  </div>
+		</div>
+	</section>
+	<script src="form.js"></script>
+</body>
+</html>

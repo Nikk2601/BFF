@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Task To Do</title>
+
+</head>
+<style>
+   * {
+      margin: 0;
+      padding: 0;
+      transition: all .125s;
+      scroll-behavior: smooth;
+   }
+
+   body {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #94eb98;
+      min-height: 100vh;
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(sky.jpg) center/cover no-repeat fixed;
+    
+   }
+
+   .hello{
+    min-height: 100vh;
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(banner-bg.jpg) center/cover no-repeat fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+   }
+
+
+   .back {
+      position: fixed;
+      pointer-events: none;
+      height: 50vw;
+      max-height: 50vh;
+      width: 100%;
+      background: linear-gradient(45deg, #cdd4be, #c5e3a1);
+      top: 0;
+      box-shadow: 0 0 50px;
+      z-index: -1;
+   }
+
+   .taskPalet {
+      display: flex;
+      align-items: center;
+      flex-flow: row;
+      height: 90vh;
+      width: 90vw;
+      box-shadow: 0 0 50px;
+      position: relative;
+   }
+
+   .taskPalet .head {
+      display: flex;
+      position: relative;
+      flex-flow: column;
+      align-items: center;
+      height: 100%;
+      width: 50%;
+   }
+
+   .head>h1,
+   .head>p {
+      margin-bottom: 30px;
+      padding: 0 10px;
+   }
+
+
+   .inPanel {
+      display: flex;
+      box-sizing: border-box;
+      position: relative;
+
+      overflow: hidden;
+      width: 50px;
+      height: 50px;
+      margin-top: 120px;
+   }
+
+   .inPanel>* {
+      position: absolute;
+      box-sizing: border-box;
+      box-shadow: inset 0 -2px 2px #ffffff, inset 0 2px 2px #fff;
+   }
+
+   .inPanel>button {
+      width: 50px;
+      height: 50px;
+      left: calc(100% - 50px);
+      padding: 6px;
+      background: none;
+      border: none;
+      outline: none;
+      fill: #000000;
+      border: .5px solid #010101;
+      border-radius: 50%;
+      padding-top: 4px;
+      box-shadow: inset 0 -2px 2px #fff7f773, inset 0 2px 2px #fff;
+   }
+
+   .inPanel input::placeholder {
+      color: #ffffff;
+   }
+
+   .inPanel input:focus::placeholder {
+      color: #0000007e;
+   }
+
+   .inPanel input:focus,
+   .inPanel .textarea:focus {
+      background-color: #ffffffab;
+   }
+
+   .inPanel>input,
+   .inPanel .textarea {
+      width: calc(100% - 60px);
+      height: 50px;
+      border: 1px solid #ffffffab;
+      border-radius: 25px;
+      padding-left: 10px;
+      outline: none;
+      background-color: #0000001f;
+
+
+      width: 0;
+      padding: 0;
+      border: none;
+   }
+
+   .inPanel .textarea {
+      top: 0px;
+      left: 0;
+      max-width: 100%;
+      min-width: 100%;
+      max-height: calc(100% - 200px);
+      min-height: calc(100% - 200px);
+      padding: 10px 20px;
+      text-align: justify;
+   }
+
+   .taskTime {
+      width: 100%;
+      background: #0000001f;
+      height: 130px;
+      /* 
+      top: calc(100% - 130px); */
+      bottom: 0;
+      padding: 10px;
+
+      height: 43px;
+      overflow: hidden;
+      border-radius: 25px;
+      border: 1px solid #ffffffab;
+   }
+
+   .taskTime input[type="checkbox"] {
+      position: absolute;
+      display: none;
+   }
+
+   .taskTime p {
+      margin: 0;
+   }
+
+   .taskTime label {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+   }
+
+
+   .others * {
+      height: 0;
+      padding: 0;
+      margin: 0;
+      overflow: hidden;
+      display: none;
+      transform: all .5s;
+   }
+
+   #timeSwitch:checked~.others * {
+      height: max-content;
+      padding: 0;
+      margin: 0;
+      overflow: hidden;
+      display: block;
+   }
+
+   .taskTime label .switch {
+      width: 30px;
+      height: 15px;
+      border-radius: 10px;
+      border: 1px solid #61fae6;
+      background-color: #dddddd;
+      position: relative;
+      transition: all .125s;
+      box-sizing: content-box;
+   }
+
+   .taskTime label .switch::before {
+      width: 14.5px;
+      box-sizing: content-box;
+      height: 14.5px;
+      border-radius: 50%;
+      background-color: #08a243;
+      content: ' ';
+      transition: all .125s;
+      position: absolute;
+      left: .5px;
+   }
+
+   #timeSwitch:checked~label .switch {
+      background-color: #fff;
+   }
+
+   #timeSwitch:checked~label .switch::before {
+      background-color: #0069cc;
+      left: calc(100% - 15.5px);
+   }
+
+   .taskTime label {
+      margin-bottom: 10px;
+      border-bottom: 1px solid #000;
+      padding-bottom: 4px;
+   }
+
+
+
+   .taskTime>input {
+      height: 20px;
+      border: none;
+      width: 100px;
+      border-bottom: 1px solid #000;
+      border-radius: 0;
+      outline: none;
+      background: none;
+   }
+
+
+   .detailPart * {
+      box-sizing: border-box;
+   }
+   
+   .detailPart > *{
+      box-shadow: inset 0 -2px 2px #00000073, inset 0 2px 2px #fff;
+   }
+
+   .detailPart {
+      position: relative;
+      top: 60px;
+      width: 300px;
+      height: 350px;
+      box-shadow: none;
+      height: 0;
+      overflow: hidden;
+   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+   /* scripted */
+   .taskPaletView .inPanel {
+      /* 
+      margin-top: 0; */
+
+      width: 300px;
+      height: 400px;
+   }
+
+
+   .taskPaletView .inPanel>input,
+   .taskPaletView .inPanel .textarea {
+
+      width: calc(100% - 60px);
+      height: 50px;
+      border: 1px solid #000000ab;
+      padding-left: 10px;
+   }
+
+   .detailView {
+      height: 350px;
+   }
+
+   .taskPaletViewUp .inPanel {
+      margin-top: 0;
+   }
+
+   /* scripted */
+
+
+
+
+
+
+
+
+
+
+   .taskList *::first-letter {
+      text-transform: uppercase;
+   }
+
+   .taskList * {
+      box-sizing: border-box;
+   }
+
+   .taskList {
+      width: 50%;
+      height: 100%;
+      display: flex;
+      flex-flow: column;
+      border-left: 2px solid #000;
+      align-items: center;
+      position: relative;
+   }
+
+   .taskList .taskBar {
+      display: flex;
+      flex-flow: row wrap;
+      width: 100%;
+      height: 100%;
+      padding: 10px 20px;
+   }
+
+   .taskList .task::after,
+   .taskList .task::before{
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    content: ' ';
+    right: -30px;
+    top: -30px;
+    transform: rotate(45deg) scale(3);
+    background-color: #acecb1;
+    transition: all .5s ease-in;
+    pointer-events: none;
+   }
+   
+   .taskList .task::after{
+      left: -30px;
+      bottom: -30px;
+   }
+
+   .taskList .task:hover::before,
+   .taskList .task:hover::after{
+      transform: rotate(90deg) scale(0.5);
+   }
+   .taskList .task {
+      width: 225px;
+      height: 125px;
+      overflow: hidden;
+      position: relative;
+      background: linear-gradient(65deg,#f2f1f1, #23cfc1);
+      padding: 5px 9px;
+      transform-style: preserve-3d;
+      margin: 10px;
+      display: flex;
+      flex-direction: column;
+      color: #000000;
+   }
+
+   .taskList .task .btnPanel {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      background-color: #000000a8;
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 30px;
+      left: 0;
+      padding: 5px 0px;
+      color: #fff;
+      opacity: 0;
+      transition: all .12s;
+   }
+
+   .taskList .task:hover .btnPanel {
+      opacity: 1;
+   }
+
+   .taskList .task button:nth-child(1) {
+      width: 20px;
+      height: 20px;
+      fill: #fff;
+   }
+
+   .taskList .task button:nth-child(2) {
+      color: #ff5e00;
+      font-size: 3em;
+   }
+
+   .taskList .task button {
+      border: none;
+      outline: none;
+      background: none;
+   }
+
+   .taskList .task .time {
+      font-size: 14px;
+      position: absolute;
+      bottom: 5px;
+   }
+
+   .taskList .task h2.title {
+      align-self: center;
+      margin-bottom: 10px;
+      width: max-content;
+      text-decoration: underline;
+      text-align: right;
+      position: relative;
+      right: 0;
+   }
+
+   .taskList .task.js {
+      animation: delete 1s linear infinite;
+   }
+
+   @keyframes delete {
+
+      100%,
+      0% {
+         background: #e3cb8e;
+         transform: scale(1);
+      }
+
+      50% {
+         background: #00ff00;
+         transform: scale(0.9);
+      }
+   }
+
+   ::-webkit-scrollbar {
+      width: 7px;
+      background: #ff000000;
+      height: 0;
+   }
+
+   .taskBar {
+      overflow: auto;
+      align-items: center;
+      justify-content: center;
+   }
+
+
+   @media screen and (max-width: 683px) {
+      body {
+         align-items: flex-start;
+      }
+
+      .taskPalet {
+         flex-flow: column;
+         height: max-content;
+         top: 30px;
+      }
+
+      .taskPalet .head {
+         width: 100%;
+         position: relative;
+         height: 420px;
+      }
+
+      .taskList {
+         border: none;
+         border-top: 2px solid #000;
+         margin-top: 100px;
+         width: 100%;
+         position: relative;
+         top: -80px;
+         max-height: 500px;
+      }
+
+      .taskPaletView .inPanel {
+         width: 250px;
+      }
+   .detailView {
+      height: 300px;
+   }
+   }
+</style>
+
+<body>
+    <header class="hello"></header>
+   <span class="back"></span>
+   <div class="taskPalet">
+      <div class="head">
+
+         <h1>What you want to be reminded of?</h1>
+         <p>Don't be stressed, you are doing fine ^_^<br></p>
+
+         <div class="inPanel">
+            <button id="addBtn">
+               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                  <path
+                     d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z" />
+               </svg>
+            </button>
+            <input type="text" id="taskTitle" placeholder="Title of Your Task">
+
+            <div class="detailPart">
+
+               <textarea class="textarea" type="" placeholder="Description"></textarea>
+
+               <div class="taskTime">
+                  <input type="checkbox" name="time" id="timeSwitch">
+                  <label for="timeSwitch">
+                     <p>setup reminder</p>
+                     <div class="switch" onclick="fnTiming()"></div>
+                  </label>
+
+                  <div class="others">
+                     <p>After how many second you want to be reminded?? (put time in seconds)</p>
+                     <input type="number" step="1" id="inTime" value="60" min="1" max="3600">
+                  </div>
+
+               </div>
+            </div>
+         </div>
+      </div>
+
+      <div class="taskList">
+
+         <h1>Reminders Wall :</h1>
+
+         <div class="taskBar">
+
+         </div>
+      </div>
+   </div>
+   </div>
+
+
+   <script>
+      var log = console.log;
+
+      var addBtn = document.querySelector('#addBtn');
+
+      var inPanel = document.querySelector('.inPanel');
+
+      var taskPalet = document.querySelector('.taskPalet');
+
+      var detailBar = document.querySelector('.detailPart');
+
+      var timeSwitch = document.querySelector('#timeSwitch');
+
+      var physicalSwitch = document.querySelector('.switch');
+
+      var timePanel = document.querySelector('.taskTime');
+
+      var taskBar = document.querySelector('.taskBar');
+
+      var titleInput = document.querySelector('#taskTitle');
+
+      var textArea = document.querySelector('.textarea');
+
+      var inTime = document.querySelector('#inTime');
+
+
+      var delBtn, editBtn;
+
+
+      var timer = false;
+
+      addBtn.addEventListener('click', click1);
+
+      titleInput.addEventListener('input', showDetail);
+
+
+
+      function click1() {
+         taskPalet.classList.add('taskPaletView');
+
+         addBtn.addEventListener('click', click2);
+      }
+
+      function click2() {
+
+         detailBar.classList.remove('detailView');
+         taskPalet.classList.remove('taskPaletViewUp');
+         taskPalet.classList.remove('taskPaletView');
+
+         saveTask();
+
+         addBtn.removeEventListener('click', click2);
+      }
+
+
+      function showDetail() {
+         detailBar.classList.add('detailView');
+         taskPalet.classList.add('taskPaletViewUp');
+      }
+
+      function fnTiming() {
+         if (!(timeSwitch.checked)) {
+            timePanel.style.height = "130px";
+            timer = true;
+         } else {
+            timePanel.style.height = "43px";
+            timer = false;
+         }
+      }
+
+      function setTimer() {
+
+         var d = inTime.value
+         var e = d * 1000;
+
+         var task = document.querySelectorAll('.task');
+
+         setTimeout(() => {
+
+
+            task.forEach(val => {
+               var b = val.lastElementChild;
+               var c = b.lastElementChild;
+               var valValue = c.innerText;
+
+               if (valValue.includes(d)) {
+
+                  val.classList.add('js');
+
+                  val.addEventListener('mouseenter', () => {
+                     val.style.transition = 'all .5s';
+                     val.style.opacity = 0;
+                     setTimeout(() => {
+                        taskBar.removeChild(val);
+                     }, 500);
+                  })
+               }
+            });
+         }, e);
+      }
+
+
+
+      function saveTask() {
+         //var structure=task.cloneNode(true);
+
+         if (timeSwitch.checked) {
+            var a = (inTime.value.length > 0) ? inTime.value + ' sec' : inTime.value + '';
+
+            var timer5 = true;/* timer check */
+
+         } else {
+            a = '';
+            var timer5 = false;/* timer check */
+         }
+
+
+
+         var structure = "<div class='task' data=" + timer5 + "><h2 class='title'>" + titleInput.value + "</h2><p class='detail'>" + textArea.value + "</p><div class='btnPanel'><button class='edit'><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 576 512'><path d='M402.6 83.2l90.2 90.2c3.8 3.8 3.8 10 0 13.8L274.4 405.6l-92.8 10.3c-12.4 1.4-22.9-9.1-21.5-21.5l10.3-92.8L388.8 83.2c3.8-3.8 10-3.8 13.8 0zm162-22.9l-48.8-48.8c-15.2-15.2-39.9-15.2-55.2 0l-35.4 35.4c-3.8 3.8-3.8 10 0 13.8l90.2 90.2c3.8 3.8 10 3.8 13.8 0l35.4-35.4c15.2-15.3 15.2-40 0-55.2zM384 346.2V448H64V128h229.8c3.2 0 6.2-1.3 8.5-3.5l40-40c7.6-7.6 2.2-20.5-8.5-20.5H48C21.5 64 0 85.5 0 112v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V306.2c0-10.7-12.9-16-20.5-8.5l-40 40c-2.2 2.3-3.5 5.3-3.5 8.5z'/></svg></button><button class='delete'>&Cross;</button><div class='time'>" + a + "</div></div></div></div>"
+
+         taskBar.insertAdjacentHTML("afterbegin", structure);
+
+         if (timeSwitch.checked) {
+            setTimer();
+         }
+
+
+         delBtn = document.querySelectorAll('.delete');
+         editBtn = document.querySelectorAll('.edit');
+
+
+         delBtn.forEach((val) => {
+            val.addEventListener('click',
+               function () {
+                  deleteTask(val);
+               });
+         });
+
+
+         editBtn.forEach(val => {
+
+            editFunction(val);
+         });
+         window.scrollTo(0, 600);
+
+      }
+
+
+      function deleteTask(val) {
+         var b1 = val.parentElement;
+         var b2 = b1.parentElement;
+
+         var father = val.parentElement;
+         var gFather = father.parentElement;
+
+         gFather.classList.add('delete');
+
+
+         var delNo = 0;
+
+         var delTask = document.querySelectorAll('.task');
+
+         delTask.forEach(sal => {
+
+            if (sal.classList.contains('delete')) {
+
+               taskBar.removeChild(taskBar.children[delNo]);
+            }
+            delNo++
+         });
+         /* 
+         setTimeout(() => {
+            taskBar.removeChild(b2);
+         }, 10); */
+      }
+
+      function editFunction(val) {
+         val.addEventListener('click', () => {
+            deleteTask(val);
+            click1();
+            showDetail();
+            var b3 = val.parentElement;
+            var b4 = b3.parentElement; /* task */
+            var timer6 = b4.getAttribute('data');
+
+            var title5 = b4.firstElementChild.innerHTML;
+            var detail5 = b4.children[1].innerHTML;
+            titleInput.value = title5;
+            textArea.value = detail5;
+            window.scrollTo(0, 100);
+         });
+      }
+
+
+   </script>
+
+<script src="https://www.drv.tw/inc/wd.js?s=xncz6jvtel8xrnny9ta6nw"></script></body>
+
+</html>
+
+
+

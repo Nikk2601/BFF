@@ -1,0 +1,148 @@
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Quicksand:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="bmi.css" >
+    
+  </head>
+  <body>
+    <section id="main">
+        <nav> 
+         <a href="#" class="logo" >
+          <img src="Bumpyride!.png" alt="Logo" >
+          </a>
+
+          <span class="menu-space"></span>
+
+          <ul class="menu">
+              <li><a href="Index.html">Home</a></li>
+              <li><a href="blog.html">Blogs</a></li>
+              <li><a href="reminder.html">Reminders</a></li>
+              <li><a href="bmi.html">BMI Calculator</a></li>
+              <li><a href="#">Login/ Sign Up</a></li>
+          </ul>
+          <a href="contact.html" class="hey"><strong>Contact Us!</strong></a>
+        </nav>
+     </section>
+    <h3><b>P</b>regnancy <b>B</b>MI<b> C</b>alculator</h3>
+  <form class="form" id="form" onsubmit="return validateForm()">
+    <div class="row-zero">
+	<td >Your Current Pregnancy Stage</td>
+	<td >
+		<select name="pstage" class="infull">
+			<option value="1">Week 1</option><option value="2">Week 2</option><option value="3">Week 3</option><option value="4">Week 4</option><option value="5">Week 5</option><option value="6">Week 6</option><option value="7">Week 7</option><option value="8">Week 8</option><option value="9">Week 9</option><option value="10">Week 10</option><option value="11">Week 11</option><option value="12">Week 12</option><option value="13">Week 13</option><option value="14">Week 14</option><option value="15">Week 15</option><option value="16">Week 16</option><option value="17">Week 17</option><option value="18">Week 18</option><option value="19">Week 19</option><option value="20" selected>Week 20</option><option value="21">Week 21</option><option value="22">Week 22</option><option value="23">Week 23</option><option value="24">Week 24</option><option value="25">Week 25</option><option value="26">Week 26</option><option value="27">Week 27</option><option value="28">Week 28</option><option value="29">Week 29</option><option value="30">Week 30</option><option value="31">Week 31</option><option value="32">Week 32</option><option value="33">Week 33</option><option value="34">Week 34</option><option value="35">Week 35</option><option value="36">Week 36</option><option value="37">Week 37</option><option value="38">Week 38</option><option value="39">Week 39</option><option value="40">Week 40</option>		</select>
+	</td>
+
+    </div>
+  <div class="row-one">
+    <input type="text" class="text-input" id="age" autocomplete="off" required/><p class="text">Age</p>
+    <label class="container">
+    <input type="radio" name="radio" id="f"><p class="text">Single</p>
+      <span class="checkmark"></span>
+    </label>
+    <label class="container">
+    <input type="radio" name="radio" id="m"><p class="text">Twins</p>
+      <span class="checkmark"></span>
+    </label>
+    </div>
+  
+  <div class="row-two">
+    <input type="text" class="text-input" name="" placeholder="In cm" required id="height" autocomplete="off" required><p class="text">Height</p>
+  <input type="text" class="text-input" name="" placeholder="In kgs" required id="weightbefore" autocomplete="off" required><p class="text">Weight Before</p>
+  <input type="text" class="text-input" name="" placeholder="In kgs" required id="weightnow" autocomplete="off" required><p class="text">Weight Now</p>
+  </div>
+  <button type="button" id="submit" class="hello">Submit</button>
+  </form>
+  <script>
+    var age = document.getElementById("age");
+var height = document.getElementById("height");
+var weightbefore = document.getElementById("weightbefore");
+var weightnow = document.getElementById("weightnow");
+
+
+var twin = document.getElementById("m");
+var single = document.getElementById("f");
+var form = document.getElementById("form");
+function validateForm() {
+    if (
+        age.value == "" ||
+        height.value == "" ||
+        weightbefore.value == "" ||
+        weightnow.value == "" ||
+        (twin.checked == false && single.checked == false)
+    ) {
+        alert("All fields are required!");
+        document
+            .getElementById("submit")
+            .removeEventListener("click", countBmi);
+    } else {
+        countBmi();
+    }
+}
+document.getElementById("submit").addEventListener("click", validateForm);
+function countBmi() {
+    var p = [age.value, height.value, weightbefore.value];
+    var q = [age.value, height.value, weightnow.value];
+    if (twin.checked) {
+        p.push("twin");
+    } else if (single.checked) {
+        p.push("single");
+    }
+    form.reset();
+    var bmibefore = Number(p[2]) / (((Number(p[1]) / 100) * Number(p[1])) / 100);
+    var bmiafter = Number(q[2]) / (((Number(q[1]) / 100) * Number(q[1])) / 100);
+    var resultbefore = "";
+    var resultafter =" ";
+    if (bmibefore < 18.5) {
+        resultbefore = "   Underweight before";
+    } else if (18.5 <= bmibefore && bmibefore <= 24.9) {
+        resultbefore = "   Healthy before";
+    } else if (25 <= bmibefore && bmibefore <= 29.9) {
+        resultbefore = "   Overweight before";
+    } else if (30 <= bmibefore && bmibefore <= 34.9) {
+        resultbefore = "   Obese before";
+    } else if (35 <= bmibefore) {
+        resultbefore = "   Extremely obese before";
+    }
+
+    if (bmiafter < 20.5) {
+        resultafter = "   Underweight now";
+    } else if (20.5 <= bmiafter && bmiafter <= 26.9) {
+        resultafter = "   Healthy now";
+    } else if (27 <= bmiafter && bmiafter <= 31.9) {
+        resultafter = "   Overweight now";
+    } else if (32 <= bmiafter && bmiafter <= 36.9) {
+        resultafter = "   Obese now";
+    } else if (37 <= bmiafter) {
+        resultafter = "   Extremely obese now";
+    }
+    var h10 = document.createElement("h10");
+    var h11 = document.createElement("h11");
+    var h20 = document.createElement("h20");
+    var h30 = document.createElement("h30");
+    var h21 = document.createElement("h21");
+    var h31 = document.createElement("h31");
+    var t1 = document.createTextNode(resultbefore);
+    var t2 = document.createTextNode(resultafter);
+    var b1 = document.createTextNode("     BMI (Pregnancy): ");
+    var b2 = document.createTextNode("     BMI (Before): ");
+    var r1 = document.createTextNode(parseFloat(bmibefore).toFixed(2));
+    var r2 = document.createTextNode(parseFloat(bmiafter).toFixed(2));
+    h10.appendChild(t1);
+    h11.appendChild(t2);
+    h20.appendChild(b1);
+    h21.appendChild(r1);
+    h30.appendChild(b2);
+    h31.appendChild(r2);
+    document.body.appendChild(h10);
+    document.body.appendChild(h11);
+    document.body.appendChild(h20);
+    document.body.appendChild(h21);
+    document.body.appendChild(h30);
+    document.body.appendChild(h31);
+    document.getElementById("submit").removeEventListener("click", countBmi);
+    document
+        .getElementById("submit")
+        .removeEventListener("click", validateForm);
+}
+document.getElementById("submit").addEventListener("click", countBmi);
+  </script>
+  </body>

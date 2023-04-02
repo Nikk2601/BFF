@@ -1,0 +1,183 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0px;
+  padding: 0px;
+  font: poppins;
+  /* background-color: ; */
+  /* background-clip: ; */
+  background-image: url("pregnancy-7424158_1920.jpg"); 
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-color: linear-gradient(rgba(230, 222, 227, 0.39),rgba(196, 195, 200, 0.39));
+  
+}
+
+h1{
+  color: black;
+}
+
+#main{
+  width: 100%;
+  height: 50vh;
+  position: relative;
+}
+
+nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width:100%;
+  background-color: rgb(194, 181, 226);
+  box-shadow: 5px 10px 30px rgba(0,0,0,0.02);
+  z-index: 1;
+}
+
+.logo img{
+  width:  70px;
+}
+
+.menu{
+  list-style: none;
+  display: flex;
+}
+
+.menu li a{
+  height:40px;
+  line-height: 43px;
+  margin: 3px;
+  padding: 0px 22px;
+  display: flex;
+  font-size: 0.8em;
+  text-transform: uppercase;
+  font-weight: 500;
+  letter-spacing: 1px;
+  color: rgb(28, 57, 5);
+}
+
+a{
+  text-decoration: none;
+}
+
+.hey{
+  color: #13512b;
+  font-weight: 500;
+  font-size: 0.9em;
+  border-bottom: 2px solid #0c230f;
+}
+p{
+  color: black;
+}
+
+.ban{
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(rgba(0,0,0,0.39),rgba(0,0,0,0.39));
+}
+
+.ban video{
+  
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: -1;
+  
+}
+
+@media(min-aspect-ratio: 16/9){
+  .ban video{
+    width: 100%;
+    height: auto;
+  }
+}
+.image{
+  width: 500px;
+  height: 500px;
+}
+
+.image img{
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+}
+
+.content {
+  text-align: center;
+ 
+  display: flex;
+  width: 90%;
+  justify-content: space-around;
+  align-items: center;
+  position: absolute;
+  left: 40%;
+  right: 50%;
+ 
+  transform: translate(-50%, -50%);
+}
+
+.main-text{
+  width: 500px;
+}
+
+.main-text h1{
+  font-size: 3.5em;
+  color: #365064;
+  margin: 0 px 0px 10 px 0 px;
+  line-height: 60px;
+}
+
+.main-text p{
+  color: rgb(117, 102, 102);
+  
+}
+
+.button {
+  align-self: center;
+  object-position: center;
+  text-align: center;
+  width: 190px;
+  height: 44px;
+  border: black;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 2em;
+  color: rgb(15, 13, 13);
+  background-color: #78799e;
+  border-radius: 20px;
+  box-shadow: 5px 10px 30px rgba(24, 139, 119, 0.2);
+}
+
+.button:hover{
+  background-color: rgba(143, 137, 230, 0.867);
+  transition: all ease0.2s;
+}
+
+.menu li a:hover {
+  background-color: #197564;
+  color: white;
+  box-shadow: 5px 10px 30px rgba(24, 139, 119, 0.2);
+   
+}
+
+/* #footer {
+  position: fixed;
+  /* padding: 10px 10px 0px 10px; */
+  /* bottom: 0;
+  width: 100%; */
+  /* Height of the footer*/
+  /* height: 40px;
+  background: blue;
+  } */ 
